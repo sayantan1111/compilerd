@@ -212,6 +212,121 @@ const testCases = [
         },
     },
     {
+        name: 'bash : hello world',
+        reqObject: {
+            language: 'bash',
+            script:
+                '#!/bin/bash\n' +
+                'echo "hello world"\n',
+        },
+        expectedResponse: {
+            val: 'hello world\n',
+            status: 200,
+            error: 0,
+        },
+    },
+    //adding testcases1
+    {
+        name: 'bash : print stdin',
+        reqObject: {
+            language: 'bash',
+            script:
+                '#!/bin/bash\n' +
+                'while read line; do\n' +
+                '    echo $line\n' +
+                'done\n',
+            stdin: '1 2 3',
+        },
+        expectedResponse: {
+            val: '1 2 3\n',
+            status: 200,
+            error: 0,
+        },
+    },
+    //adding testcases2
+    {
+        name: 'go : hello world',
+        reqObject: {
+            language: 'go',
+            script:
+                'package main\n' +
+                'import "fmt"\n' +
+                'func main() {\n' +
+                '    fmt.Println("hello world")\n' +
+                '}\n',
+        },
+        expectedResponse: {
+            val: 'hello world\n',
+            status: 200,
+            error: 0,
+        },
+    },
+    {
+        name: 'go : print stdin',
+        reqObject: {
+            language: 'go',
+            script:
+                'package main\n' +
+                'import (\n' +
+                '    "bufio"\n' +
+                '    "fmt"\n' +
+                '    "os"\n' +
+                ')\n' +
+                'func main() {\n' +
+                '    scanner := bufio.NewScanner(os.Stdin)\n' +
+                '    for scanner.Scan() {\n' +
+                '        fmt.Println(scanner.Text())\n' +
+                '    }\n' +
+                '}\n',
+            stdin: '1 2 3',
+        },
+        expectedResponse: {
+            val: '1\n2\n3\n',
+            status: 200,
+            error: 0,
+        },
+    },
+    //adding testcases3
+    {
+        name: 'rust : hello world',
+        reqObject: {
+            language: 'rust',
+            script:
+                'fn main() {\n' +
+                '    println!("hello world");\n' +
+                '}\n',
+        },
+        expectedResponse: {
+            val: 'hello world\n',
+            status: 200,
+            error: 0,
+        },
+    },
+    {
+        name: 'rust : print stdin',
+        reqObject: {
+            language: 'rust',
+            script:
+                'use std::io::{self, BufRead};\n' +
+                'fn main() {\n' +
+                '    let stdin = io::stdin();\n' +
+                '    for line in stdin.lock().lines() {\n' +
+                '        match line {\n' +
+                '            Ok(l) => println!("{}", l),\n' +
+                '            Err(_) => break,\n' +
+                '        }\n' +
+                '    }\n' +
+                '}\n',
+            stdin: '1 2 3',
+        },
+        expectedResponse: {
+            val: '1\n2\n3\n',
+            status: 200,
+            error: 0,
+        },
+    },
+    
+    {
         name: 'TLE test',
         reqObject: {
             language: 'nodejs',
@@ -298,6 +413,7 @@ const testCases = [
             error: 0,
         },
     },
+
 ]
 
 module.exports = { testCases }

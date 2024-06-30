@@ -1,4 +1,4 @@
-const { CPP, C, PYTHON, JAVA, NODEJS, RUBY, PROMPTV1, PROMPTV2 } = require('../enums/supportedLanguages')
+const { CPP, C, PYTHON, JAVA, NODEJS, RUBY, BASH, GO, RUST,PROMPTV1, PROMPTV2 } = require('../enums/supportedLanguages')
 const ONE_MB = 1024 // ulimit uses Kilobyte as base unit
 const ALLOWED_RAM = process.env.ALLOWED_RAM || 512
 
@@ -45,6 +45,31 @@ const LANGUAGES_CONFIG = {
         filename: 'solution.rb',
         memory: ALLOWED_RAM * ONE_MB,
     },
+    //adding language1
+    [BASH]: {
+        compile: 'bash -n solution.sh',
+        run: 'bash solution.sh',
+        timeout: 10,
+        filename: 'solution.php',
+        memory: ALLOWED_RAM * ONE_MB,
+    },
+    //adding language2
+    [GO]: {
+        compile: 'go build -o solution solution.go',
+        run: './solution',
+        timeout: 10,
+        filename: 'solution.go',
+        memory: ALLOWED_RAM * ONE_MB,
+    },
+    //adding language3
+    [RUST]: {
+        compile: 'rustc solution.rs -o solution',
+        run: './solution',
+        timeout: 10,
+        filename: 'solution.rs',
+        memory: ALLOWED_RAM * ONE_MB,
+    },
+    
     [PROMPTV1]: {
         model: 'gpt-4-1106-preview',
     },
